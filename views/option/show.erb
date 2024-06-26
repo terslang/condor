@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<%#include "objects/option.h" %>
+<% tfetch(Option, option); %>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title><%= controller()->name() + ": " + controller()->activeAction() %></title>
+</head>
+<body>
+<p style="color: red"><%=$ error %></p>
+<p style="color: green"><%=$ notice %></p>
+
+<h1>Showing Option</h1>
+<dt>ID</dt><dd><%= option.id() %></dd><br>
+<dt>Name</dt><dd><%= option.name() %></dd><br>
+<dt>Body</dt><dd><%= option.body() %></dd><br>
+<dt>Election ID</dt><dd><%= option.electionId() %></dd><br>
+
+<%== linkTo("Edit", urla("save", option.id())) %> |
+<%== linkTo("Back", urla("index")) %>
+
+</body>
+</html>

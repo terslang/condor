@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<%#include "objects/option.h" %>
+<% tfetch(QVariantMap, option); %>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title><%= controller()->name() + ": " + controller()->activeAction() %></title>
+</head>
+<body>
+<p style="color: red"><%=$ error %></p>
+<p style="color: green"><%=$ notice %></p>
+
+<h1>New Option</h1>
+
+<%== formTag(urla("create"), Tf::Post) %>
+  <p>
+    <label>Name<br><input name="option[name]" value="<%= option["name"] %>" /></label>
+  </p>
+  <p>
+    <label>Body<br><input name="option[body]" value="<%= option["body"] %>" /></label>
+  </p>
+  <p>
+    <label>Election ID<br><input name="option[electionId]" value="<%= option["electionId"] %>" /></label>
+  </p>
+  <p>
+    <input type="submit" value="Create" />
+  </p>
+</form>
+
+<%== linkTo("Back", urla("index")) %>
+
+</body>
+</html>

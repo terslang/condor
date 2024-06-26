@@ -17,3 +17,5 @@ HEADERS += applicationcontroller.h
 SOURCES += applicationcontroller.cpp
 HEADERS += electioncontroller.h
 SOURCES += electioncontroller.cpp
+HEADERS += optioncontroller.h
+SOURCES += optioncontroller.cpp

@@ -10,7 +10,7 @@ CREATE TABLE election (
 );
 
 CREATE TABLE option (
-    id TEXT PRIMARY KEY DEFAULT (hex(randomblob(16))) NOT NULL,
+    id TEXT PRIMARY KEY NOT NULL ON CONFLICT REPLACE DEFAULT (hex(randomblob(4))), 
     name VARCHAR(255) NOT NULL,
     body TEXT NOT NULL,
     election_id INTEGER NOT NULL,
@@ -26,13 +26,13 @@ CREATE TABLE result (
 );
 
 CREATE TABLE ballot (
-    id TEXT PRIMARY KEY DEFAULT (hex(randomblob(16))) NOT NULL,
+    id TEXT PRIMARY KEY NOT NULL ON CONFLICT REPLACE DEFAULT (hex(randomblob(4))),
     election_id INTEGER NOT NULL,
     FOREIGN KEY (election_id) REFERENCES election(id)
 );
 
 CREATE TABLE voter (
-    id TEXT PRIMARY KEY DEFAULT (hex(randomblob(16))) NOT NULL,
+    id TEXT PRIMARY KEY NOT NULL ON CONFLICT REPLACE DEFAULT (hex(randomblob(4))),
     election_id INTEGER NOT NULL,
     email VARCHAR(255) NOT NULL,
     FOREIGN KEY (election_id) REFERENCES election(id)
