@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<%#include "objects/election.h" %>
+<% tfetch(QVariantMap, election); %>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title><%= controller()->name() + ": " + controller()->activeAction() %></title>
+</head>
+<body>
+<p style="color: red"><%=$ error %></p>
+<p style="color: green"><%=$ notice %></p>
+
+<h1>New Election</h1>
+
+<%== formTag(urla("create"), Tf::Post) %>
+  <p>
+    <label>Name<br><input name="election[name]" value="<%= election["name"] %>" /></label>
+  </p>
+  <p>
+    <label>Body<br><input name="election[body]" value="<%= election["body"] %>" /></label>
+  </p>
+  <p>
+    <label>Polling Open<br><input name="election[pollingOpen]" value="<%= election["pollingOpen"] %>" /></label>
+  </p>
+  <p>
+    <label>Polling Close<br><input name="election[pollingClose]" value="<%= election["pollingClose"] %>" /></label>
+  </p>
+  <p>
+    <input type="submit" value="Create" />
+  </p>
+</form>
+
+<%== linkTo("Back", urla("index")) %>
+
+</body>
+</html>

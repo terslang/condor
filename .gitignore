@@ -30,3 +30,12 @@
 *.exe
 *.out
 *.app
+
+# CMake Build
+build/
+
+# Treefrog
+db/
+log/
+lib/
+tmp/

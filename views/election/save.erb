@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<%#include "objects/election.h" %>
+<% tfetch(QVariantMap, election); %>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title><%= controller()->name() + ": " + controller()->activeAction() %></title>
+</head>
+<body>
+<p style="color: red"><%=$ error %></p>
+<p style="color: green"><%=$ notice %></p>
+
+<h1>Editing Election</h1>
+
+<%== formTag(urla("save", election["id"]), Tf::Post) %>
+  <p>
+    <label>ID<br><input type="text" name="election[id]" value="<%= election["id"] %>" readonly="readonly" /></label>
+  </p>
+  <p>
+    <label>Name<br><input type="text" name="election[name]" value="<%= election["name"] %>" /></label>
+  </p>
+  <p>
+    <label>Body<br><input type="text" name="election[body]" value="<%= election["body"] %>" /></label>
+  </p>
+  <p>
+    <label>Polling Open<br><input type="text" name="election[pollingOpen]" value="<%= election["pollingOpen"] %>" /></label>
+  </p>
+  <p>
+    <label>Polling Close<br><input type="text" name="election[pollingClose]" value="<%= election["pollingClose"] %>" /></label>
+  </p>
+  <p>
+    <label>Result ID<br><input type="text" name="election[resultId]" value="<%= election["resultId"] %>" /></label>
+  </p>
+  <p>
+    <input type="submit" value="Save" />
+  </p>
+</form>
+
+<%== linkTo("Show", urla("show", election["id"])) %> |
+<%== linkTo("Back", urla("index")) %>
+</body>
+</html>

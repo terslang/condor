@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<%#include "objects/election.h" %>
+<% tfetch(Election, election); %>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title><%= controller()->name() + ": " + controller()->activeAction() %></title>
+</head>
+<body>
+<p style="color: red"><%=$ error %></p>
+<p style="color: green"><%=$ notice %></p>
+
+<h1>Showing Election</h1>
+<dt>ID</dt><dd><%= election.id() %></dd><br>
+<dt>Name</dt><dd><%= election.name() %></dd><br>
+<dt>Body</dt><dd><%= election.body() %></dd><br>
+<dt>Polling Open</dt><dd><%= election.pollingOpen() %></dd><br>
+<dt>Polling Close</dt><dd><%= election.pollingClose() %></dd><br>
+<dt>Result ID</dt><dd><%= election.resultId() %></dd><br>
+
+<%== linkTo("Edit", urla("save", election.id())) %> |
+<%== linkTo("Back", urla("index")) %>
+
+</body>
+</html>
