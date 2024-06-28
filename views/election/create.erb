@@ -17,7 +17,10 @@
     <label>Name<br><input name="election[name]" value="<%= election["name"] %>" /></label>
   </p>
   <p>
-    <label>Body<br><input name="election[body]" value="<%= election["body"] %>" /></label>
+    <label>Body<br><textarea name="election[body]" value="<%= election["body"] %>" ></textarea></label>
+  </p>
+  <p>
+    <label>Quorum<br><input name="election[quorum]" value="<%= election["quorum"] %>" /></label>
   </p>
   <p>
     <label>Polling Open<br><input name="election[pollingOpen]" value="<%= election["pollingOpen"] %>" /></label>

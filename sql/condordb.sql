@@ -4,6 +4,7 @@ CREATE TABLE election (
     id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     name VARCHAR(255) NOT NULL,
     body TEXT NOT NULL,
+    quorum INTEGER NOT NULL,
     polling_open TIMESTAMP,
     polling_close TIMESTAMP,
     result_id INTEGER REFERENCES result(id)

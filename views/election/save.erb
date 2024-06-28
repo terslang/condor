@@ -17,10 +17,13 @@
     <label>ID<br><input type="text" name="election[id]" value="<%= election["id"] %>" readonly="readonly" /></label>
   </p>
   <p>
-    <label>Name<br><input type="text" name="election[name]" value="<%= election["name"] %>" /></label>
+    <label>Name<br><input type="text" name="election[name]" value="<%= election["name"] %>" ></label>
   </p>
   <p>
-    <label>Body<br><input type="text" name="election[body]" value="<%= election["body"] %>" /></label>
+    <label>Body<br><textarea name="election[body]" value="<%= election["body"] %>" /></textarea></label>
+  </p>
+  <p>
+    <label>Quorum<br><input type="text" name="election[quorum]" value="<%= election["quorum"] %>" /></label>
   </p>
   <p>
     <label>Polling Open<br><input type="text" name="election[pollingOpen]" value="<%= election["pollingOpen"] %>" /></label>

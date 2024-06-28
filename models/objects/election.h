@@ -23,12 +23,14 @@ public:
     void setName(const QString &name);
     QString body() const;
     void setBody(const QString &body);
+    int quorum() const;
+    void setQuorum(int quorum);
     QString pollingOpen() const;
     void setPollingOpen(const QString &pollingOpen);
     QString pollingClose() const;
     void setPollingClose(const QString &pollingClose);
     QVariant resultId() const;
-    void setResultId(const QVariant resultId);
+    void setResultId(const QVariant &resultId);
     Election &operator=(const Election &other);
 
     bool create() override { return TAbstractModel::create(); }
@@ -36,7 +38,7 @@ public:
     bool save()   override { return TAbstractModel::save(); }
     bool remove() override { return TAbstractModel::remove(); }
 
-    static Election create(const QString &name, const QString &body, const QString &pollingOpen, const QString &pollingClose, const QVariant resultId);
+    static Election create(const QString &name, const QString &body, int quorum, const QString &pollingOpen, const QString &pollingClose, const QVariant &resultId);
     static Election create(const QVariantMap &values);
     static Election get(int id);
     static int count();

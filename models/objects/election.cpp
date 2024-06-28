@@ -51,6 +51,16 @@ void Election::setBody(const QString &body)
     d->body = body;
 }
 
+int Election::quorum() const
+{
+    return d->quorum;
+}
+
+void Election::setQuorum(int quorum)
+{
+    d->quorum = quorum;
+}
+
 QString Election::pollingOpen() const
 {
     return d->polling_open;
@@ -76,7 +86,7 @@ QVariant Election::resultId() const
     return d->result_id;
 }
 
-void Election::setResultId(const QVariant resultId)
+void Election::setResultId(const QVariant &resultId)
 {
     d->result_id = resultId;
 }
@@ -87,11 +97,12 @@ Election &Election::operator=(const Election &other)
     return *this;
 }
 
-Election Election::create(const QString &name, const QString &body, const QString &pollingOpen, const QString &pollingClose, const QVariant resultId)
+Election Election::create(const QString &name, const QString &body, int quorum, const QString &pollingOpen, const QString &pollingClose, const QVariant &resultId)
 {
     ElectionObject obj;
     obj.name = name;
     obj.body = body;
+    obj.quorum = quorum;
     obj.polling_open = pollingOpen;
     obj.polling_close = pollingClose;
     obj.result_id = resultId;
