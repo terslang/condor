@@ -1,5 +1,6 @@
 #include "electionservice.h"
 #include "objects/election.h"
+#include "objects/option.h"
 #include <TreeFrogModel>
 
 
@@ -12,7 +13,9 @@ void ElectionService::index()
 void ElectionService::show(int id)
 {
     auto election = Election::get(id);
+    auto optionList = Option::getByElectionId(id);
     texport(election);
+    texport(optionList);
 }
 
 int ElectionService::create(THttpRequest &request)
@@ -37,7 +40,9 @@ void ElectionService::edit(TSession& session, int id)
     auto model = Election::get(id);
     if (!model.isNull()) {
         auto election = model.toVariantMap();
+        auto optionList = Option::getByElectionId(id);
         texport(election);
+        texport(optionList);
     }
 }
 

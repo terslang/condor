@@ -1,4 +1,5 @@
 #pragma once
+#include "tcriteria.h"
 #include <QStringList>
 #include <QDateTime>
 #include <QVariant>
@@ -38,6 +39,7 @@ public:
     static int count();
     static QList<Option> getAll();
     static QJsonArray getAllJson(const QStringList &properties = QStringList());
+    static QList<Option> getByElectionId(int electionId);
 
 private:
     QSharedDataPointer<OptionObject> d;

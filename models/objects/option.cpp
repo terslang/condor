@@ -111,6 +111,12 @@ QJsonArray Option::getAllJson(const QStringList &properties)
     return tfConvertToJsonArray(getAll(), properties);
 }
 
+QList<Option> Option::getByElectionId(int electionId)
+{
+    TCriteria crt(OptionObject::ElectionId, electionId);
+    return tfGetModelListByCriteria<Option, OptionObject>(crt);
+}
+
 TModelObject *Option::modelData()
 {
     return d.data();
