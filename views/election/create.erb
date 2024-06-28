@@ -23,10 +23,10 @@
     <label>Quorum<br><input name="election[quorum]" value="<%= election["quorum"] %>" /></label>
   </p>
   <p>
-    <label>Polling Open<br><input name="election[pollingOpen]" value="<%= election["pollingOpen"] %>" /></label>
+    <label>Polling Open<br><input type="datetime-local" name="election[pollingOpen]" value="<%= election["pollingOpen"] %>" /></label>
   </p>
   <p>
-    <label>Polling Close<br><input name="election[pollingClose]" value="<%= election["pollingClose"] %>" /></label>
+    <label>Polling Close<br><input type="datetime-local" name="election[pollingClose]" value="<%= election["pollingClose"] %>" /></label>
   </p>
   <p>
     <input type="submit" value="Create" />

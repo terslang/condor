@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<%#include "objects/ballot.h" %>
+<%#include "objects/ballotchoice.h" %>
+<%#include "objects/option.h" %>
+<% tfetch(QVariantMap, ballot); %>
+<% tfetch(QList<Option>, optionList); %>
+
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title><%= controller()->name() + ": " + controller()->activeAction() %></title>
+</head>
+<body>
+<p style="color: red"><%=$ error %></p>
+<p style="color: green"><%=$ notice %></p>
+
+<h1>Editing Ballot</h1>
+
+<%== formTag(urla("cast", ballot["id"]), Tf::Post) %>
+  
+  <dt>ID</dt><dd><%= ballot["id"] %></dd>
+  <dt>Election ID</dt><dd><%= ballot["electionId"] %></dd>
+  <br>
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Body</th>
+        <th>Preference</th>
+      </tr>
+      <% for (const auto &i : optionList) { %>
+        <tr>
+          <td><%= i.id() %></td>
+          <td><%= i.name() %></td>
+          <td><%= i.body() %></td>
+          <td>
+            <select class="form-select" aria-label="Ballot Choices" name="choices[<%= i.id() %>]">
+              <% for (qsizetype n = 1; n <= optionList.size(); n++) { %>
+                 <option value="<%= n %>"><%= n %></option>
+              <% } %>
+            </select>
+          </td>
+        </tr>
+      <% } %>
+    </table>
+  </div>
+  <p>
+    <input type="submit" value="Cast" />
+  </p>
+</form>
+
+<%== linkTo("Show", urla("show", ballot["id"])) %> |
+<%== linkTo("Back", urla("index")) %>
+</body>
+</html>

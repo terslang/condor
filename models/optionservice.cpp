@@ -18,6 +18,7 @@ void OptionService::show(const QString &id)
 QString OptionService::create(THttpRequest &request)
 {
     auto option = request.formItems("option");
+    option["id"] = QUuid::createUuid().toString(QUuid::WithoutBraces);
     auto model = Option::create(option);
     if (model.isNull()) {
         QString error = "Failed to create.";

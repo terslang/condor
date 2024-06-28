@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <%#include "objects/ballot.h" %>
+<%#include "objects/ballotchoice.h" %>
+<%#include "objects/option.h" %>
 <% tfetch(QVariantMap, ballot); %>
+
 <html>
 <head>
   <meta charset="UTF-8">
@@ -18,7 +21,8 @@
   </p>
   <p>
     <label>Election ID<br><input type="text" name="ballot[electionId]" value="<%= ballot["electionId"] %>" /></label>
-  </p>
+  </p>  
+  <br>
   <p>
     <input type="submit" value="Save" />
   </p>

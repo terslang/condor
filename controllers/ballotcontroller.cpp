@@ -1,21 +1,52 @@
 #include "ballotcontroller.h"
+#include "ballotchoiceservice.h"
 #include "ballotservice.h"
 #include <TreeFrogController>
 
-static BallotService service;
-
+static BallotService ballotService;
+static BallotChoiceService ballotChoiceService;
 
 void BallotController::index()
 {
-    service.index();
+    ballotService.index();
     render();
 }
 
 void BallotController::show(const QString &id)
 {
-    service.show(id);
+    ballotService.show(id);
     render();
 }
+
+void BallotController::cast(const QString &id)
+{
+    int res;
+    switch (request().method()) {
+    case Tf::Get:
+        ballotChoiceService.showOptions(session(), id);
+        render();
+        break;
+    case Tf::Post:
+        res = ballotChoiceService.createMany(request(), session(), id);
+        if (res > 0) {
+            // Save completed
+            redirect(urla("show", id));
+        } else if (res < 0) {
+            // Failed
+            rollbackTransaction();
+            render();
+        } else {
+            // Retry
+            redirect(urla("cast", id));
+        }
+        break;
+    default:
+        renderErrorResponse(Tf::NotFound);
+        break;
+    }    
+    render();
+}
+
 
 void BallotController::create()
 {
@@ -26,9 +57,9 @@ void BallotController::create()
         render();
         break;
     case Tf::Post:
-        id = service.create(request());
+        id = ballotService.create(request());
         if (!id.isEmpty()) {
-            redirect(urla("show", id));
+            redirect(urla("cast", id));
         } else {
             render();
         }
@@ -45,11 +76,11 @@ void BallotController::save(const QString &id)
 
     switch (request().method()) {
     case Tf::Get:
-        service.edit(session(), id);
+        ballotService.edit(session(), id);
         render();
         break;
     case Tf::Post:
-        res = service.save(request(), session(), id);
+        res = ballotService.save(request(), session(), id);
         if (res > 0) {
             // Save completed
             redirect(urla("show", id));
@@ -71,7 +102,7 @@ void BallotController::remove(const QString &id)
 {
     switch (request().method()) {
     case Tf::Post:
-        service.remove(id);
+        ballotService.remove(id);
         redirect(urla("index"));
         break;
     default:
