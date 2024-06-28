@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<%#include "objects/ballot.h" %>
+<% tfetch(Ballot, ballot); %>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title><%= controller()->name() + ": " + controller()->activeAction() %></title>
+</head>
+<body>
+<p style="color: red"><%=$ error %></p>
+<p style="color: green"><%=$ notice %></p>
+
+<h1>Showing Ballot</h1>
+<dt>ID</dt><dd><%= ballot.id() %></dd><br>
+<dt>Election ID</dt><dd><%= ballot.electionId() %></dd><br>
+
+<%== linkTo("Edit", urla("save", ballot.id())) %> |
+<%== linkTo("Back", urla("index")) %>
+
+</body>
+</html>

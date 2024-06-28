@@ -39,3 +39,4 @@ db/
 log/
 lib/
 tmp/
+.cache/

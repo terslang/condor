@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <%#include "objects/election.h" %>
-<%#include "objects/option.h" %>
+<%#include "objects/election.h" %>
 <% tfetch(QVariantMap, election); %>
 <html>
 <head>
@@ -37,28 +37,27 @@
   </p>
   <dt>Options</dt>
   <dd>
-    <%== linkTo("Create a new Option", url("Option", "create")) %><br>
+  <%== linkTo("Create a new Option", url("Option", "create")) %><br>
   <br>
-  <table class="table table-bordered table-striped">
+  <table border="1" cellpadding="5" style="border: 1px #d0d0d0 solid; border-collapse: collapse;">
     <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Body</th>
-        <th>Actions</th>
-      </tr>
-      <% tfetch(QList<Option>, optionList); %>
-      <% for (const auto &i : optionList) { %>
-        <tr>
-          <td><%= i.id() %></td>
-          <td><%= i.name() %></td>
-          <td><%= i.body() %></td>
-          <td>
-            <%== linkTo("Show", url("Option", "show", i.id())) %>
-            <%== linkTo("Edit", url("Option", "save", i.id())) %>
-            <%== linkTo("Remove", url("Option", "remove", i.id()), Tf::Post, "confirm('Are you sure?')") %>
-          </td>
-        </tr>
-      <% } %>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Body</th>
+    </tr>
+  <% tfetch(QList<Option>, optionList); %>
+  <% for (const auto &i : optionList) { %>
+    <tr>
+      <td><%= i.id() %></td>
+      <td><%= i.name() %></td>
+      <td><%= i.body() %></td>
+      <td>
+        <%== linkTo("Show", url("Option", "show", i.id())) %>
+        <%== linkTo("Edit", url("Option", "save", i.id())) %>
+        <%== linkTo("Remove", url("Option", "remove", i.id()), Tf::Post, "confirm('Are you sure?')") %>
+      </td>
+    </tr>
+  <% } %>
   </table>
   </dd><br>
   <p>

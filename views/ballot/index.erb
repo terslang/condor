@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<%#include "objects/option.h" %>
+<%#include "objects/ballot.h" %>
 <html>
 <head>
   <meta charset="UTF-8">
@@ -7,24 +7,20 @@
 </head>
 <body>
 
-<h1>Listing Option</h1>
+<h1>Listing Ballot</h1>
 
-<%== linkTo("Create a new Option", urla("create")) %><br>
+<%== linkTo("Create a new Ballot", urla("create")) %><br>
 <br>
 <table class="table table-bordered table-striped">
   <tr>
     <th>ID</th>
-    <th>Name</th>
-    <th>Body</th>
     <th>Election ID</th>
     <th>Actions</th>
   </tr>
-<% tfetch(QList<Option>, optionList); %>
-<% for (const auto &i : optionList) { %>
+<% tfetch(QList<Ballot>, ballotList); %>
+<% for (const auto &i : ballotList) { %>
   <tr>
     <td><%= i.id() %></td>
-    <td><%= i.name() %></td>
-    <td><%= i.body() %></td>
     <td><%= i.electionId() %></td>
     <td>
       <%== linkTo("Show", urla("show", i.id())) %>

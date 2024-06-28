@@ -19,3 +19,5 @@ HEADERS += electioncontroller.h
 SOURCES += electioncontroller.cpp
 HEADERS += optioncontroller.h
 SOURCES += optioncontroller.cpp
+HEADERS += ballotcontroller.h
+SOURCES += ballotcontroller.cpp
