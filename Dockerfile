@@ -7,7 +7,7 @@ RUN wget -c https://github.com/treefrogframework/treefrog-framework/archive/refs
     && tar xvzf v2.9.0.tar.gz
 
 RUN cd treefrog-framework-2.9.0/ && ./configure --enable-shared-mongoc \
-    && cd src/ && make && make install && cd ../tools/ && make && make install \
+    && cd src/ && make -j$(nproc) && make install && cd ../tools/ && make -j$(nproc) && make install \
     && ldconfig 
 
 RUN rm -rf treefrog-framework-2.9.0 v2.9.0.tar.gz
@@ -18,7 +18,7 @@ WORKDIR /condor
 
 RUN mkdir db && sqlite3 db/condordb < sql/condordb.sql
 
-RUN mkdir build && cmake -S . -B build -DCMAKE_BUILD_TYPE=Release && make -C build
+RUN mkdir build && cmake -S . -B build -DCMAKE_BUILD_TYPE=Release && make -C build -j$(nproc)
 
 EXPOSE 8800
 
