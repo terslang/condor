@@ -1,6 +1,7 @@
 #include <TreeFrogModel>
 #include "election.h"
 #include "sqlobjects/electionobject.h"
+#include "tmodelutil.h"
 
 
 Election::Election() :
@@ -137,6 +138,16 @@ int Election::count()
 QList<Election> Election::getAll()
 {
     return tfGetModelListByCriteria<Election, ElectionObject>(TCriteria());
+}
+
+QList<Election> Election::getOngoing()
+{
+    return tfGetModelListByCriteria<Election, ElectionObject>(TCriteria(ElectionObject::ResultId, TSql::IsNull));
+}
+
+QList<Election> Election::getDecided()
+{
+    return tfGetModelListByCriteria<Election, ElectionObject>(TCriteria(ElectionObject::ResultId, TSql::IsNotNull));
 }
 
 QJsonArray Election::getAllJson(const QStringList &properties)

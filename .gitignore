@@ -40,3 +40,6 @@ log/
 lib/
 tmp/
 .cache/
+
+# emacs autosave
+\#*#

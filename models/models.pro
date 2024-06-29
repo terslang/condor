@@ -32,3 +32,5 @@ HEADERS += objects/ballotchoice.h
 SOURCES += objects/ballotchoice.cpp
 HEADERS += ballotchoiceservice.h
 SOURCES += ballotchoiceservice.cpp
+HEADERS += homeservice.h
+SOURCES += homeservice.cpp

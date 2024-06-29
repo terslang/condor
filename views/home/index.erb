@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<%#include "objects/election.h" %>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title><%= controller()->name() + ": " + controller()->activeAction() %></title>
+</head>
+<body>
+
+<h1>Condor</h1>
+
+<%== linkTo("Create a new Election", url("Election", "create")) %><br>
+<%== linkTo("Cast your vote", url("Ballot", "index")) %><br>
+
+<br>
+<h2>Ongoing Elections</h2>
+<div class="table-responsive">
+ <table class="table table-bordered table-striped">
+   <tr>
+     <th>ID</th>
+     <th>Name</th>
+     <th>Body</th>
+     <th>Quorum</th>
+     <th>Polling Open</th>
+     <th>Polling Close</th>
+     <th>Result ID</th>
+     <th>Actions</th>
+   </tr>
+   <% tfetch(QList<Election>, ongoingElections); %>
+   <% for (const auto &i : ongoingElections) { %>
+     <tr>
+       <td><%= i.id() %></td>
+       <td><%= i.name() %></td>
+       <td><%= i.body() %></td>
+       <td><%= i.quorum() %></td>
+       <td><%= i.pollingOpen() %></td>
+       <td><%= i.pollingClose() %></td>
+       <td><%= i.resultId() %></td>
+       <td>
+         <%== linkTo("Show", url("Election", "show", i.id())) %>
+         <%== linkTo("Edit", url("Election", "save", i.id())) %>
+         <%== linkTo("Remove", url("Election", "remove", i.id()), Tf::Post, "confirm('Are you sure?')") %>
+       </td>
+     </tr>
+   <% } %>
+ </table>
+</div>
+<h2>Decided Elections</h2>
+<div class="table-responsive">
+ <table class="table table-bordered table-striped">
+   <tr>
+     <th>ID</th>
+     <th>Name</th>
+     <th>Body</th>
+     <th>Quorum</th>
+     <th>Polling Open</th>
+     <th>Polling Close</th>
+     <th>Result ID</th>
+     <th>Actions</th>
+   </tr>
+   <% tfetch(QList<Election>, decidedElections); %>
+   <% for (const auto &i : decidedElections) { %>
+     <tr>
+       <td><%= i.id() %></td>
+       <td><%= i.name() %></td>
+       <td><%= i.body() %></td>
+       <td><%= i.quorum() %></td>
+       <td><%= i.pollingOpen() %></td>
+       <td><%= i.pollingClose() %></td>
+       <td><%= i.resultId() %></td>
+       <td>
+         <%== linkTo("Show", url("Election", "show", i.id())) %>
+         <%== linkTo("Edit", url("Election", "save", i.id())) %>
+         <%== linkTo("Remove", url("Election", "remove", i.id()), Tf::Post, "confirm('Are you sure?')") %>
+       </td>
+     </tr>
+   <% } %>
+ </table>
+</div>
+</body>
+</html>
