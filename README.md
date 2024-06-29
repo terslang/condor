@@ -1,5 +1,6 @@
 # condor
 Condorcet Voting Engine
+![condor-screenshot](https://github.com/terslang/condor/assets/127589779/f9791917-2cd5-4584-a933-0a01db59671f)
 
 ## First Time Setup
 run sql/condordb.sql and create a sqlite3 db in db/condordb
@@ -11,8 +12,7 @@ sqlite3 db/condordb < sql/condordb.sql
 ```bash
 cd condor
 cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=1
-cd build 
-make -j$(nproc)
+make -C build -j$(nproc)
 cd ..
 treefrog -e dev
 ```
