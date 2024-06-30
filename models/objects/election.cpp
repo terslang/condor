@@ -1,7 +1,6 @@
 #include <TreeFrogModel>
 #include "election.h"
 #include "sqlobjects/electionobject.h"
-#include "tmodelutil.h"
 
 
 Election::Election() :
@@ -82,14 +81,14 @@ void Election::setPollingClose(const QString &pollingClose)
     d->polling_close = pollingClose;
 }
 
-QVariant Election::resultId() const
+QString Election::winnerOptionId() const
 {
-    return d->result_id;
+    return d->winner_option_id;
 }
 
-void Election::setResultId(const QVariant &resultId)
+void Election::setWinnerOptionId(const QString &winnerOptionId)
 {
-    d->result_id = resultId;
+    d->winner_option_id = winnerOptionId;
 }
 
 Election &Election::operator=(const Election &other)
@@ -98,7 +97,7 @@ Election &Election::operator=(const Election &other)
     return *this;
 }
 
-Election Election::create(const QString &name, const QString &body, int quorum, const QString &pollingOpen, const QString &pollingClose, const QVariant &resultId)
+Election Election::create(const QString &name, const QString &body, int quorum, const QString &pollingOpen, const QString &pollingClose, const QString &winnerOptionId)
 {
     ElectionObject obj;
     obj.name = name;
@@ -106,7 +105,7 @@ Election Election::create(const QString &name, const QString &body, int quorum, 
     obj.quorum = quorum;
     obj.polling_open = pollingOpen;
     obj.polling_close = pollingClose;
-    obj.result_id = resultId;
+    obj.winner_option_id = winnerOptionId;
     if (!obj.create()) {
         return Election();
     }
@@ -142,13 +141,14 @@ QList<Election> Election::getAll()
 
 QList<Election> Election::getOngoing()
 {
-    return tfGetModelListByCriteria<Election, ElectionObject>(TCriteria(ElectionObject::ResultId, TSql::IsNull));
+    return tfGetModelListByCriteria<Election, ElectionObject>(TCriteria(ElectionObject::WinnerOptionId, TSql::IsNull));
 }
 
 QList<Election> Election::getDecided()
 {
-    return tfGetModelListByCriteria<Election, ElectionObject>(TCriteria(ElectionObject::ResultId, TSql::IsNotNull));
+    return tfGetModelListByCriteria<Election, ElectionObject>(TCriteria(ElectionObject::WinnerOptionId, TSql::IsNotNull));
 }
+
 
 QJsonArray Election::getAllJson(const QStringList &properties)
 {

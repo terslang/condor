@@ -23,7 +23,7 @@
      <th>Quorum</th>
      <th>Polling Open</th>
      <th>Polling Close</th>
-     <th>Result ID</th>
+     <th>Result</th>
      <th>Actions</th>
    </tr>
    <% tfetch(QList<Election>, ongoingElections); %>
@@ -35,7 +35,7 @@
        <td><%= i.quorum() %></td>
        <td><%= i.pollingOpen() %></td>
        <td><%= i.pollingClose() %></td>
-       <td><%= i.resultId() %></td>
+       <td><%= i.winnerOptionId().isEmpty() ? "TBD" : linkTo("Show", url("Result", "show", i.id()))  %></td>
        <td>
          <%== linkTo("Show", url("Election", "show", i.id())) %>
          <%== linkTo("Edit", url("Election", "save", i.id())) %>
@@ -67,7 +67,7 @@
        <td><%= i.quorum() %></td>
        <td><%= i.pollingOpen() %></td>
        <td><%= i.pollingClose() %></td>
-       <td><%= i.resultId() %></td>
+       <td><%= i.winnerOptionId().isEmpty() ? "TBD" : linkTo("Show", url("Result", "show", i.id()))  %></td>
        <td>
          <%== linkTo("Show", url("Election", "show", i.id())) %>
          <%== linkTo("Edit", url("Election", "save", i.id())) %>

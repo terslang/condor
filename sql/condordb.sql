@@ -7,7 +7,7 @@ CREATE TABLE election (
     quorum INTEGER NOT NULL,
     polling_open TIMESTAMP,
     polling_close TIMESTAMP,
-    result_id INTEGER REFERENCES result(id) ON DELETE RESTRICT
+    winner_option_id TEXT REFERENCES option(id) ON DELETE RESTRICT
 );
 
 CREATE TABLE option (
@@ -16,14 +16,6 @@ CREATE TABLE option (
     body TEXT NOT NULL,
     election_id INTEGER NOT NULL,
     FOREIGN KEY (election_id) REFERENCES election (id) ON DELETE CASCADE
-);
-
-CREATE TABLE result (
-    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    election_id INTEGER NOT NULL,
-    option_id TEXT,
-    FOREIGN KEY (election_id) REFERENCES election(id) ON DELETE CASCADE,
-    FOREIGN KEY (option_id) REFERENCES option(id) ON DELETE CASCADE
 );
 
 CREATE TABLE ballot (

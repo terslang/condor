@@ -1,5 +1,4 @@
 #pragma once
-#include "tcriteria.h"
 #include <QStringList>
 #include <QDateTime>
 #include <QVariant>
@@ -30,8 +29,8 @@ public:
     void setPollingOpen(const QString &pollingOpen);
     QString pollingClose() const;
     void setPollingClose(const QString &pollingClose);
-    QVariant resultId() const;
-    void setResultId(const QVariant &resultId);
+    QString winnerOptionId() const;
+    void setWinnerOptionId(const QString &winnerOptionId);
     Election &operator=(const Election &other);
 
     bool create() override { return TAbstractModel::create(); }
@@ -39,13 +38,13 @@ public:
     bool save()   override { return TAbstractModel::save(); }
     bool remove() override { return TAbstractModel::remove(); }
 
-    static Election create(const QString &name, const QString &body, int quorum, const QString &pollingOpen, const QString &pollingClose, const QVariant &resultId);
+    static Election create(const QString &name, const QString &body, int quorum, const QString &pollingOpen, const QString &pollingClose, const QString &winnerOptionId);
     static Election create(const QVariantMap &values);
     static Election get(int id);
-    static int count();
-    static QList<Election> getAll();
     static QList<Election> getOngoing();
     static QList<Election> getDecided();
+    static int count();
+    static QList<Election> getAll();
     static QJsonArray getAllJson(const QStringList &properties = QStringList());
 
 private:

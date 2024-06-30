@@ -11,7 +11,7 @@ public:
     int quorum {0};
     QString polling_open;
     QString polling_close;
-    QVariant result_id; // modified from int -> QVariant. As int cant be null but the column is nullable
+    QString winner_option_id;
 
     enum PropertyIndex {
         Id = 0,
@@ -20,14 +20,14 @@ public:
         Quorum,
         PollingOpen,
         PollingClose,
-        ResultId,
+        WinnerOptionId,
     };
 
     int primaryKeyIndex() const override { return Id; }
     int autoValueIndex() const override { return Id; }
     QString tableName() const override { return QStringLiteral("election"); }
 
-private:    /*** Don't modify below this line (You can't tell me what to do. You're not my mom ) ***/
+private:    /*** Don't modify below this line ***/
     Q_OBJECT
     Q_PROPERTY(int id READ getid WRITE setid)
     T_DEFINE_PROPERTY(int, id)
@@ -41,7 +41,7 @@ private:    /*** Don't modify below this line (You can't tell me what to do. You
     T_DEFINE_PROPERTY(QString, polling_open)
     Q_PROPERTY(QString polling_close READ getpolling_close WRITE setpolling_close)
     T_DEFINE_PROPERTY(QString, polling_close)
-    Q_PROPERTY(QVariant result_id READ getresult_id WRITE setresult_id)
-    T_DEFINE_PROPERTY(QVariant, result_id)
+    Q_PROPERTY(QString winner_option_id READ getwinner_option_id WRITE setwinner_option_id)
+    T_DEFINE_PROPERTY(QString, winner_option_id)
 };
 

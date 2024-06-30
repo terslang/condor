@@ -40,7 +40,7 @@ void ElectionService::edit(TSession& session, int id)
     auto model = Election::get(id);
     if (!model.isNull()) {
         auto election = model.toVariantMap();
-        auto optionList = Option::getByElectionId(id);
+        auto optionList = Option::getByElectionId(id);   
         texport(election);
         texport(optionList);
     }
