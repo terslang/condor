@@ -1,6 +1,6 @@
 # condor
 Condorcet Voting Engine
-![condor-screenshot](https://github.com/terslang/condor/assets/127589779/f9791917-2cd5-4584-a933-0a01db59671f)
+
 
 ## First Time Setup
 run sql/condordb.sql and create a sqlite3 db in db/condordb
@@ -33,4 +33,12 @@ treefrog -e dev
 Navigate to localhost:8800/Election
 or localhost:8800/Ballot after creating an election and adding some options
 
+## Screenshots
 
+![image](https://github.com/terslang/condor/assets/127589779/e74e4a00-fea5-41e9-9100-33a8f1433583)
+
+![condor-screenshot](https://github.com/terslang/condor/assets/127589779/f9791917-2cd5-4584-a933-0a01db59671f)
+
+## Database Design
+
+![condor](https://github.com/terslang/condor/assets/127589779/fffe32de-1f8d-4451-bf46-ca83926504f3)
