@@ -8,6 +8,15 @@
 static ResultService resultService;
 static PairwiseContestService pairwiseContestService;
 
+bool ResultController::preFilter()
+{
+    if (!isUserLoggedIn()) {
+        redirect(url("Account", "form"));
+        return false;
+    }
+    return true;
+}
+
 void ResultController::show(const QString &id)
 {
     resultService.show(id.toInt());

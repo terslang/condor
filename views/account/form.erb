@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+</head>
+<body>
+  <h1>Login</h1>
+  <div style="color: red;"><%==$message %></div>
+  <%== formTag(urla("login")); %>
+    <div class="mb-3">
+      <label for="EmailInput" class="form-label">Email address</label>
+      <input type="email" name="email" value="" class="form-control" id="EmailInput" />
+    </div>
+    <div class="mb-3">
+      <label for="PasswordInput" class="form-label">Password</label>
+      <input type="password" name="password" value="" class="form-control" />
+    </div>
+    <div>
+      <input type="submit" class="btn btn-primary" value="Login" />
+    </div>
+  </form>
+</body>
+</html>

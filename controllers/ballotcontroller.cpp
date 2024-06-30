@@ -6,6 +6,16 @@
 static BallotService ballotService;
 static BallotChoiceService ballotChoiceService;
 
+bool BallotController::preFilter()
+{
+    if (!isUserLoggedIn()) {
+        redirect(url("Account", "form"));
+        return false;
+    }
+    return true;
+}
+
+
 void BallotController::index()
 {
     ballotService.index();

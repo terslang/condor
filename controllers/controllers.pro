@@ -25,3 +25,5 @@ HEADERS += homecontroller.h
 SOURCES += homecontroller.cpp
 HEADERS += resultcontroller.h
 SOURCES += resultcontroller.cpp
+HEADERS += accountcontroller.h
+SOURCES += accountcontroller.cpp

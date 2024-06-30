@@ -4,6 +4,14 @@
 
 static OptionService service;
 
+bool OptionController::preFilter()
+{
+    if (!isUserLoggedIn()) {
+        redirect(url("Account", "form"));
+        return false;
+    }
+    return true;
+}
 
 void OptionController::index()
 {

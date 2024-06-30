@@ -8,6 +8,19 @@ run sql/condordb.sql and create a sqlite3 db in db/condordb
 sqlite3 db/condordb < sql/condordb.sql
 ```
 
+add some users to the database like:
+```bash
+sqlite3 db/condordb
+> INSERT INTO user(email, password) VALUES ('admin@example.org', '482c811da5d5b4bc6d497ffa98491e38');
+```
+
+`password` is a simple md5 hashed password. It can be generated using the following command (Here "password123" is used as an example):
+
+```bash
+echo -n "password123" | md5sum
+```
+
+
 ## Building and Running
 ```bash
 cd condor

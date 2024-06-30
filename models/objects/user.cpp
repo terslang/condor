@@ -1,4 +1,5 @@
 #include <TreeFrogModel>
+#include <qcryptographichash.h>
 #include "user.h"
 #include "sqlobjects/userobject.h"
 
@@ -61,9 +62,12 @@ User User::authenticate(const QString &email, const QString &password)
     if (email.isEmpty() || password.isEmpty())
         return User();
 
+    QString hashedPassword = QString(QCryptographicHash::hash(password.toUtf8(), QCryptographicHash::Md5).toHex());
+    qDebug() << "HASHED" << hashedPassword;
+    
     TSqlORMapper<UserObject> mapper;
     UserObject obj = mapper.findFirst(TCriteria(UserObject::Email, email));
-    if (obj.isNull() || obj.password != password) {
+    if (obj.isNull() || obj.password != hashedPassword) {
         obj.clear();
     }
     return User(obj);

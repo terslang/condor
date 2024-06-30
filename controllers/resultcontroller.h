@@ -12,5 +12,6 @@ public:
 public slots:
     void show(const QString &electionId);
     void create(const QString &electionId);
+    bool preFilter() override;
 };
 
