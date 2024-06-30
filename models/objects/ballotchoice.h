@@ -37,6 +37,7 @@ public:
     static BallotChoice get(const QString &ballotId);
     static QList<BallotChoice> getByBallotId(const QString &ballotId);
     static int count();
+    static int getOutrankingCount(const QString &optionAId, const QString &optionBId);
     static QList<BallotChoice> getAll();
     static QJsonArray getAllJson(const QStringList &properties = QStringList());
 

@@ -10,7 +10,7 @@ public:
     ResultController() : ApplicationController() { }
 
 public slots:
-    void show(const QString &id);
-    void create();
+    void show(const QString &electionId);
+    void create(const QString &electionId);
 };
 

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <%#include "objects/election.h" %>
 <%#include "objects/option.h" %>
+<%#include "objects/pairwisecontest.h" %>
+
 <% tfetch(Election, election); %>
 <html>
 <head>
@@ -61,5 +63,33 @@
     <% } %>
   </table>
 </div>
+
+<h2>Pairwise Contest</h2>
+<div class="table-responsive">
+  <table class="table table-bordered table-striped">
+    <tr>
+      <th>Option A</th>
+      <th>Option B</th>
+      <th>Pairwise Winner</th>
+    </tr>
+    <% tfetch(QList<QVariantMap>, pairwiseResults); %>
+    <% for (const auto &i : pairwiseResults) { %>
+      <tr>
+        <td class="<%= i["optionAId"] == i["winnerId"] ? "table-success": "" %>">
+          <%= i["optionAName"] %> (<%= i["optionACount"] %>)
+        </td>
+        <td class="<%= i["optionBId"] == i["winnerId"] ? "table-success": "" %>">
+          <%= i["optionBName"] %> (<%= i["optionBCount"] %>)
+        </td>
+        <td>
+          <%= i["optionAId"] == i["winnerId"] ? i["optionAName"] : i["optionBName"]  %>
+          by <%= i["delta"] %> votes
+        </td>
+      </tr>
+    <% } %>
+  </table>
+</div>
+
+
 </body>
 </html>

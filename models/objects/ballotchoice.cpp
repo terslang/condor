@@ -1,6 +1,7 @@
 #include <TreeFrogModel>
 #include "ballotchoice.h"
 #include "sqlobjects/ballotchoiceobject.h"
+#include "tmodelutil.h"
 
 
 BallotChoice::BallotChoice() :
@@ -106,6 +107,21 @@ int BallotChoice::count()
 {
     TSqlORMapper<BallotChoiceObject> mapper;
     return mapper.findCount();
+}
+
+int BallotChoice::getOutrankingCount(const QString &optionAId, const QString &optionBId)
+{
+    TSqlQuery query;
+    query.prepare("SELECT COUNT(*) "
+                  "FROM ballot_choice a "
+                  "JOIN ballot_choice b "
+                  "ON a.ballot_id = b.ballot_id "
+                  "WHERE a.option_id = ? AND b.option_id = ? AND a.rank < b.rank;");
+    query.addBind(optionAId).addBind(optionBId);
+    query.exec();
+    if(query.next())
+        return query.value(0).toInt();
+    return -1;
 }
 
 QList<BallotChoice> BallotChoice::getAll()

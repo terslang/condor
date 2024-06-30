@@ -32,12 +32,12 @@ CREATE TABLE voter (
 );
 
 CREATE TABLE pairwise_contest (
-    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     election_id INTEGER NOT NULL,
     option_a_id TEXT NOT NULL,
     option_b_id TEXT NOT NULL,
     option_a_count INTEGER NOT NULL,
     option_b_count INTEGER NOT NULL,
+    PRIMARY KEY (election_id, option_a_id, option_b_id),
     FOREIGN KEY (election_id) REFERENCES election(id) ON DELETE CASCADE,
     FOREIGN KEY (option_a_id) REFERENCES option(id) ON DELETE CASCADE,
     FOREIGN KEY (option_b_id) REFERENCES option(id) ON DELETE CASCADE

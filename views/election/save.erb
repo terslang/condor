@@ -33,7 +33,7 @@
     <label>Polling Close<br><input type="text" name="election[pollingClose]" value="<%= election["pollingClose"] %>" /></label>
   </p>
   <p>
-    <label>Winner Option ID<br><input type="text" name="election[winnerOptionId]" value="<%= election["winnerOptionId"] %>" /></label>
+    <%== linkTo("Collapse Election?", url("Result", "create", election["id"]), Tf::Post, "confirm('Really generate results?')") %>
   </p>
   <dt>Options</dt>
   <dd>
