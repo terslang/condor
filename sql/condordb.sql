@@ -27,8 +27,9 @@ CREATE TABLE ballot (
 CREATE TABLE voter (
     id TEXT PRIMARY KEY NOT NULL,
     election_id INTEGER NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    FOREIGN KEY (election_id) REFERENCES election(id) ON DELETE CASCADE
+    email VARCHAR(128) NOT NULL,
+    FOREIGN KEY (election_id) REFERENCES election(id) ON DELETE CASCADE,
+    FOREIGN KEY (email) REFERENCES user(email) ON DELETE CASCADE
 );
 
 CREATE TABLE pairwise_contest (
@@ -50,4 +51,9 @@ CREATE TABLE ballot_choice (
     PRIMARY KEY (ballot_id, option_id),
     FOREIGN KEY (ballot_id) REFERENCES ballot(id) ON DELETE CASCADE,
     FOREIGN KEY (option_id) REFERENCES option(id) ON DELETE CASCADE
+);
+
+CREATE TABLE user (
+    email VARCHAR(128) PRIMARY KEY NOT NULL,
+    password VARCHAR(128) NOT NULL,
 );
