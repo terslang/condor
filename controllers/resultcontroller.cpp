@@ -1,4 +1,6 @@
 #include "resultcontroller.h"
+#include "election.h"
+#include "pairwisecontest.h"
 #include "resultservice.h"
 #include "objects/option.h"
 #include "pairwisecontestservice.h"
@@ -28,6 +30,39 @@ void ResultController::create(const QString &id)
                       texport(error);
                       break;
                   }
+              }
+          }
+          
+          auto pairwiseContestList = PairwiseContest::get(electionId);
+          
+          // find condorcet winner
+          for(const auto& candidate: options) {
+              bool isWinner = true;
+              for(const auto& opponent : options) {
+                  if(candidate.id() != opponent.id()) {
+                      bool lost = false;
+                      for(const auto& contest: pairwiseContestList) {
+                          if ((contest.optionAId() == candidate.id()
+                               && contest.optionBId() == opponent.id()
+                               && contest.optionACount() < contest.optionBCount())
+                              ||
+                              (contest.optionAId() == opponent.id()
+                               && contest.optionBId() == candidate.id()
+                               && contest.optionACount() > contest.optionBCount())) {
+                              lost = true;
+                              break;
+                          }
+                      }
+                      if(lost) {
+                          isWinner = false;
+                          break;
+                      }
+                  }
+              }
+              if (isWinner) {
+                  auto election = Election::get(electionId);
+                  election.setWinnerOptionId(candidate.id());
+                  election.save();
               }
           }
           redirect(urla("show", id));
