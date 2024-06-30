@@ -18,7 +18,15 @@
 <dt>Quorum</dt><dd><%= election.quorum() %></dd><br>
 <dt>Polling Open</dt><dd><%= election.pollingOpen() %></dd><br>
 <dt>Polling Close</dt><dd><%= election.pollingClose() %></dd><br>
-<dt>Result</dt><dd><%= election.winnerOptionId().isEmpty() ? "TBD" : linkTo("Show", url("Result", "show", election.id()))  %></dd><br>
+<dt>Result</dt>
+<dd>
+  <% if(election.winnerOptionId().isEmpty()) { %>
+     TBD
+  <% } else { %>
+     <%== linkTo("Show", url("Result", "show", election.id())) %>
+  <% } %>
+</dd>
+<br>
 <dt>Options</dt>  
 <dd>
   <%== linkTo("Create a new Option", url("Option", "create")) %>

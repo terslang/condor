@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<%#include "objects/election.h" %>
+<%#include "objects/option.h" %>
+<% tfetch(Election, election); %>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title><%= controller()->name() + ": " + controller()->activeAction() %></title>
+</head>
+<body>
+<p style="color: red"><%=$ error %></p>
+<p style="color: green"><%=$ notice %></p>
+
+<h1>Showing Result</h1>
+
+<h2>Election Details</h2>
+<div class="table-responsive">
+ <table class="table table-bordered">
+   <tr>
+     <th>ID</th>
+     <th>Name</th>
+     <th>Body</th>
+     <th>Quorum</th>
+     <th>Polling Open</th>
+     <th>Polling Close</th>
+     <th>Actions</th>
+   </tr>
+   <tr>
+     <td><%= election.id() %></td>
+     <td><%= election.name() %></td>
+     <td><%= election.body() %></td>
+     <td><%= election.quorum() %></td>
+     <td><%= election.pollingOpen() %></td>
+     <td><%= election.pollingClose() %></td>
+     <td>
+       <%== linkTo("Show", url("Election", "show", election.id())) %>
+     </td>
+   </tr>
+ </table>
+</div>
+
+<h2>Winner</h2>
+<div class="table-responsive">
+  <table class="table table-bordered">
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Body</th>
+      <th>Actions</th>
+    </tr>
+    <% tfetch(QList<Option>, optionList); %>
+    <% for (const auto &i : optionList) { %>
+      <tr class="<%= i.id() == election.winnerOptionId() ? "table-success" : ""  %>">
+        <td><%= i.id() %></td>
+        <td><%= i.name() %></td>
+        <td><%= i.body() %></td>
+        <td>
+          <%== linkTo("Show", url("Option", "show", i.id())) %>
+        </td>
+      </tr>
+    <% } %>
+  </table>
+</div>
+</body>
+</html>

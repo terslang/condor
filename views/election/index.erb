@@ -32,7 +32,13 @@
        <td><%= i.quorum() %></td>
        <td><%= i.pollingOpen() %></td>
        <td><%= i.pollingClose() %></td>
-       <td><%= "TBD" %></td>
+       <td>
+         <% if(i.winnerOptionId().isEmpty()) { %>
+            TBD
+         <% } else { %>
+            linkTo("Show", url("Result", "show", i.id()))
+         <% } %>
+       </td>
        <td>
          <%== linkTo("Show", urla("show", i.id())) %>
          <%== linkTo("Edit", urla("save", i.id())) %>

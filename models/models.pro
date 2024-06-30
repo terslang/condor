@@ -34,3 +34,5 @@ HEADERS += ballotchoiceservice.h
 SOURCES += ballotchoiceservice.cpp
 HEADERS += homeservice.h
 SOURCES += homeservice.cpp
+HEADERS += resultservice.h
+SOURCES += resultservice.cpp

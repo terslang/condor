@@ -23,3 +23,5 @@ HEADERS += ballotcontroller.h
 SOURCES += ballotcontroller.cpp
 HEADERS += homecontroller.h
 SOURCES += homecontroller.cpp
+HEADERS += resultcontroller.h
+SOURCES += resultcontroller.cpp
