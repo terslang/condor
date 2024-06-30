@@ -33,8 +33,9 @@ void BallotController::cast(const QString &id)
             redirect(urla("show", id));
         } else if (res < 0) {
             // Failed
+            qDebug() << "Failed to save ballot" << id;
             rollbackTransaction();
-            render();
+            redirect(urla("cast", id));
         } else {
             // Retry
             redirect(urla("cast", id));
@@ -43,8 +44,7 @@ void BallotController::cast(const QString &id)
     default:
         renderErrorResponse(Tf::NotFound);
         break;
-    }    
-    render();
+    }
 }
 
 

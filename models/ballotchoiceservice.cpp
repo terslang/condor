@@ -3,7 +3,7 @@
 #include "objects/ballot.h"
 #include "objects/option.h"
 #include <TreeFrogModel>
-
+#include <algorithm>
 
 void BallotChoiceService::index()
 {
@@ -28,22 +28,46 @@ int BallotChoiceService::createMany(THttpRequest &request, TSession& session, co
     }
 
     auto choices = request.formItems("choices");
+    auto options = Option::getByElectionId(model.electionId());
+    auto visited = QList<bool>(options.size(), false);
+    qsizetype maxRank = options.size();
 
     for(QVariantMap::const_iterator iter = choices.begin(); iter != choices.end(); ++iter) {
-      bool intParseOk = false;
-      auto choice = BallotChoice::create(ballotId, iter.key(), iter.value().toInt(&intParseOk));
-      if(!intParseOk)
-      {
-          QString error = "Error parsing int " + iter.value().toString();
-          tflash(error);
-          return -1;
-      }
-      if(choice.isNull())
-      {
-          QString error = "Error inserting ballot choice for ballot " + ballotId + "and option " + iter.key();
-          tflash(error);
-          return -1;
-      }
+        // check if option is valid
+        auto optionIter = std::find_if(options.begin(), options.end(), [&iter](Option opt){ return opt.id() == iter.key();});
+        if(optionIter == options.end()) {
+            QString error = "Option not valid for current ballot";
+            tflash(error);
+            return -1;
+        }
+     
+        // remove the option to prevent recasting
+        options.erase(optionIter);
+        bool intParseOk = false;
+        int rank = iter.value().toInt(&intParseOk);        
+        if(!intParseOk)
+        {
+            QString error = "Error parsing int " + iter.value().toString();
+            tflash(error);
+            return -1;
+        }
+
+        if(rank > maxRank || rank < 1 || visited[rank])
+        {
+            QString error = "Invalid rank preference provided " + iter.value().toString();
+            tflash(error);
+            return -1;
+        }
+
+        auto choice = BallotChoice::create(ballotId, iter.key(), rank);
+        if(choice.isNull())
+        {
+            QString error = "Error inserting ballot choice for ballot " + ballotId + "and option " + iter.key();
+            tflash(error);
+            return -1;
+        }
+        
+        visited[rank] = true;
     }
 
     QString notice = "Updated successfully.";
