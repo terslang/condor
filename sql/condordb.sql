@@ -25,9 +25,9 @@ CREATE TABLE ballot (
 );
 
 CREATE TABLE voter (
-    id TEXT PRIMARY KEY NOT NULL,
-    election_id INTEGER NOT NULL,
     email VARCHAR(128) NOT NULL,
+    election_id INTEGER NOT NULL,
+    PRIMARY KEY (email, election_id),
     FOREIGN KEY (election_id) REFERENCES election(id) ON DELETE CASCADE,
     FOREIGN KEY (email) REFERENCES user(email) ON DELETE CASCADE
 );

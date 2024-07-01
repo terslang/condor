@@ -1,10 +1,13 @@
 #include "ballotcontroller.h"
 #include "ballotchoiceservice.h"
 #include "ballotservice.h"
+#include "tglobal.h"
+#include "voterservice.h"
 #include <TreeFrogController>
 
 static BallotService ballotService;
 static BallotChoiceService ballotChoiceService;
+static VoterService voterService;
 
 bool
 BallotController::preFilter()
@@ -63,7 +66,24 @@ BallotController::cast(const QString& id)
 void
 BallotController::create()
 {
-  QString id;
+  QString id, voterId;
+  bool intParseOk = true;
+  int electionId =
+    request().formItems("ballot")["electionId"].toInt(&intParseOk);
+
+  if (!intParseOk) {
+    QString error = "failed to parse int: electionId";
+    tflash(error);
+    render();
+    return;
+  }
+
+  // won't be empty due to preFiler and primary key constraint of user table
+  auto loggedInUserEmail = identityKeyOfLoginUser();
+  if (voterService.hasVoted(loggedInUserEmail, electionId)) {
+    render();
+    return;
+  }
 
   switch (request().method()) {
     case Tf::Get:
@@ -71,9 +91,11 @@ BallotController::create()
       break;
     case Tf::Post:
       id = ballotService.create(request());
-      if (!id.isEmpty()) {
+      voterId = voterService.create(loggedInUserEmail, electionId);
+      if (!id.isEmpty() && !voterId.isEmpty()) {
         redirect(urla("cast", id));
       } else {
+        rollbackTransaction();
         render();
       }
       break;

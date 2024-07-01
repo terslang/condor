@@ -54,6 +54,7 @@ QString
 BallotService::create(THttpRequest& request)
 {
   auto ballot = request.formItems("ballot");
+
   ballot["id"] = QUuid::createUuid().toString(QUuid::WithoutBraces);
   auto model = Ballot::create(ballot);
 
