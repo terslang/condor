@@ -55,5 +55,5 @@ CREATE TABLE ballot_choice (
 
 CREATE TABLE user (
     email VARCHAR(128) PRIMARY KEY NOT NULL,
-    password VARCHAR(128) NOT NULL,
+    password VARCHAR(128) NOT NULL
 );
