@@ -14,16 +14,16 @@
 
 <%== formTag(urla("save", option["id"]), Tf::Post) %>
   <p>
-    <label>ID<br><input type="text" name="option[id]" value="<%= option["id"] %>" readonly="readonly" /></label>
+    <label>ID<br><input type="text" class="form-control" name="option[id]" value="<%= option["id"] %>" readonly="readonly" /></label>
   </p>
   <p>
-    <label>Name<br><input type="text" name="option[name]" value="<%= option["name"] %>" /></label>
+    <label>Name<br><input type="text" class="form-control" name="option[name]" value="<%= option["name"] %>" /></label>
   </p>
   <p>
-    <label>Body<br><input type="text" name="option[body]" value="<%= option["body"] %>" /></label>
+    <label>Body<br><input type="text" class="form-control" name="option[body]" value="<%= option["body"] %>" /></label>
   </p>
   <p>
-    <label>Election ID<br><input type="text" name="option[electionId]" value="<%= option["electionId"] %>" /></label>
+    <label>Election ID<br><input type="text" class="form-control" name="option[electionId]" value="<%= option["electionId"] %>" /></label>
   </p>
   <p>
     <input type="submit" class="btn btn-primary" value="Save" />

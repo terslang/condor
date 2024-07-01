@@ -15,22 +15,22 @@
 
 <%== formTag(urla("save", election["id"]), Tf::Post) %>
   <p>
-    <label>ID<br><input type="text" name="election[id]" value="<%= election["id"] %>" readonly="readonly" /></label>
+    <label>ID<br><input class="form-control" type="text" name="election[id]" value="<%= election["id"] %>" readonly="readonly" /></label>
   </p>
   <p>
-    <label>Name<br><input type="text" name="election[name]" value="<%= election["name"] %>" ></label>
+    <label>Name<br><input class="form-control" type="text" name="election[name]" value="<%= election["name"] %>" ></label>
   </p>
   <p>
-    <label>Body<br><textarea name="election[body]" value="<%= election["body"] %>" /></textarea></label>
+    <label>Body<br><textarea class="form-control" name="election[body]" value="<%= election["body"] %>" /></textarea></label>
   </p>
   <p>
-    <label>Quorum<br><input type="text" name="election[quorum]" value="<%= election["quorum"] %>" /></label>
+    <label>Quorum<br><input type="text" class="form-control" name="election[quorum]" value="<%= election["quorum"] %>" /></label>
   </p>
   <p>
-    <label>Polling Open<br><input type="text" name="election[pollingOpen]" value="<%= election["pollingOpen"] %>" /></label>
+    <label>Polling Open<br><input type="text" class="form-control" name="election[pollingOpen]" value="<%= election["pollingOpen"] %>" /></label>
   </p>
   <p>
-    <label>Polling Close<br><input type="text" name="election[pollingClose]" value="<%= election["pollingClose"] %>" /></label>
+    <label>Polling Close<br><input type="text" class="form-control" name="election[pollingClose]" value="<%= election["pollingClose"] %>" /></label>
   </p>
   <p>
     <%== linkTo("Collapse Election?", url("Result", "create", election["id"]), Tf::Post, "confirm('Really generate results?')") %>

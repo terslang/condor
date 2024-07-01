@@ -14,19 +14,19 @@
 
 <%== formTag(urla("create"), Tf::Post) %>
   <p>
-    <label>Name<br><input name="election[name]" value="<%= election["name"] %>" /></label>
+    <label>Name<br><input class="form-control" name="election[name]" value="<%= election["name"] %>" /></label>
   </p>
   <p>
-    <label>Body<br><textarea name="election[body]" value="<%= election["body"] %>" ></textarea></label>
+    <label>Body<br><textarea class="form-control" name="election[body]" value="<%= election["body"] %>" ></textarea></label>
   </p>
   <p>
-    <label>Quorum<br><input name="election[quorum]" value="<%= election["quorum"] %>" /></label>
+    <label>Quorum<br><input class="form-control" name="election[quorum]" value="<%= election["quorum"] %>" /></label>
   </p>
   <p>
-    <label>Polling Open<br><input type="datetime-local" name="election[pollingOpen]" value="<%= election["pollingOpen"] %>" /></label>
+    <label>Polling Open<br><input class="form-control" type="datetime-local" name="election[pollingOpen]" value="<%= election["pollingOpen"] %>" /></label>
   </p>
   <p>
-    <label>Polling Close<br><input type="datetime-local" name="election[pollingClose]" value="<%= election["pollingClose"] %>" /></label>
+    <label>Polling Close<br><input class="form-control" type="datetime-local" name="election[pollingClose]" value="<%= election["pollingClose"] %>" /></label>
   </p>
   <p>
     <input type="submit" class="btn btn-primary" value="Create" />

@@ -15,13 +15,13 @@
 
 <%== formTag(urla("create"), Tf::Post) %>
   <p>
-    <label>Name<br><input name="option[name]" value="<%= option["name"] %>" /></label>
+    <label>Name<br><input class="form-control" name="option[name]" value="<%= option["name"] %>" /></label>
   </p>
   <p>
-    <label>Body<br><textarea name="option[body]" value="<%= option["body"] %>" ></textarea></label>
+    <label>Body<br><textarea class="form-control" name="option[body]" value="<%= option["body"] %>" ></textarea></label>
   </p>
   <p>
-    <label>Election ID<br><input name="option[electionId]" value="<%= electionId.isEmpty() ? option["electionId"] : electionId %>" <%= electionId.isEmpty() ? "" : "readonly" %>/></label>
+    <label>Election ID<br><input class="form-control" name="option[electionId]" value="<%= electionId.isEmpty() ? option["electionId"] : electionId %>" <%= electionId.isEmpty() ? "" : "readonly" %>/></label>
   </p>
   <p>
     <input type="submit" class="btn btn-primary" value="Create" />
