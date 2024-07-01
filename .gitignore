@@ -43,3 +43,6 @@ tmp/
 
 # emacs autosave
 \#*#
+
+# Clangd
+.clang-format

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <%#include "objects/option.h" %>
 <% tfetch(QVariantMap, option); %>
+<% tfetch(QString, electionId); %>
 <html>
 <head>
   <meta charset="UTF-8">
@@ -20,7 +21,7 @@
     <label>Body<br><textarea name="option[body]" value="<%= option["body"] %>" ></textarea></label>
   </p>
   <p>
-    <label>Election ID<br><input name="option[electionId]" value="<%= option["electionId"] %>" /></label>
+    <label>Election ID<br><input name="option[electionId]" value="<%= electionId.isEmpty() ? option["electionId"] : electionId %>" <%= electionId.isEmpty() ? "" : "readonly" %>/></label>
   </p>
   <p>
     <input type="submit" class="btn btn-primary" value="Create" />
