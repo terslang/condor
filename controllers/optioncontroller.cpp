@@ -1,5 +1,7 @@
 #include "optioncontroller.h"
 #include "optionservice.h"
+#include "tfnamespace.h"
+#include "tglobal.h"
 #include <TreeFrogController>
 
 static OptionService service;
@@ -23,6 +25,19 @@ void OptionController::show(const QString &id)
 {
     service.show(id);
     render();
+}
+
+void OptionController::create(const QString &electionId)
+{
+    switch (request().method()) {
+    case Tf::Get:
+        texport(electionId);
+        render();
+        break;
+    default:
+        renderErrorResponse(Tf::NotFound);
+        break;
+    }
 }
 
 void OptionController::create()

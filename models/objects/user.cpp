@@ -1,29 +1,19 @@
-#include <TreeFrogModel>
-#include <qcryptographichash.h>
 #include "user.h"
 #include "sqlobjects/userobject.h"
+#include <TreeFrogModel>
+#include <qcryptographichash.h>
 
-
-User::User() :
-    TAbstractUser(),
-    TAbstractModel(),
-    d(new UserObject())
+User::User() : TAbstractUser(), TAbstractModel(), d(new UserObject())
 {
     // set the initial parameters
 }
 
-User::User(const User &other) :
-    TAbstractUser(),
-    TAbstractModel(),
-    d(other.d)
-{ }
+User::User(const User &other) : TAbstractUser(), TAbstractModel(), d(other.d) {}
 
-User::User(const UserObject &object) :
-    TAbstractUser(),
-    TAbstractModel(),
-    d(new UserObject(object))
-{ }
-
+User::User(const UserObject &object)
+    : TAbstractUser(), TAbstractModel(), d(new UserObject(object))
+{
+}
 
 User::~User()
 {
@@ -31,29 +21,17 @@ User::~User()
     // the shared data object 'UserObject' is deleted.
 }
 
-QString User::email() const
-{
-    return d->email;
-}
+QString User::email() const { return d->email; }
 
-void User::setEmail(const QString &email)
-{
-    d->email = email;
-}
+void User::setEmail(const QString &email) { d->email = email; }
 
-QString User::password() const
-{
-    return d->password;
-}
+QString User::password() const { return d->password; }
 
-void User::setPassword(const QString &password)
-{
-    d->password = password;
-}
+void User::setPassword(const QString &password) { d->password = password; }
 
 User &User::operator=(const User &other)
 {
-    d = other.d;  // increments the reference count of the data
+    d = other.d; // increments the reference count of the data
     return *this;
 }
 
@@ -62,9 +40,11 @@ User User::authenticate(const QString &email, const QString &password)
     if (email.isEmpty() || password.isEmpty())
         return User();
 
-    QString hashedPassword = QString(QCryptographicHash::hash(password.toUtf8(), QCryptographicHash::Md5).toHex());
+    QString hashedPassword = QString(
+        QCryptographicHash::hash(password.toUtf8(), QCryptographicHash::Md5)
+            .toHex());
     qDebug() << "HASHED" << hashedPassword;
-    
+
     TSqlORMapper<UserObject> mapper;
     UserObject obj = mapper.findFirst(TCriteria(UserObject::Email, email));
     if (obj.isNull() || obj.password != hashedPassword) {
@@ -116,15 +96,9 @@ QJsonArray User::getAllJson(const QStringList &properties)
     return tfConvertToJsonArray(getAll(), properties);
 }
 
-TModelObject *User::modelData()
-{
-    return d.data();
-}
+TModelObject *User::modelData() { return d.data(); }
 
-const TModelObject *User::modelData() const
-{
-    return d.data();
-}
+const TModelObject *User::modelData() const { return d.data(); }
 
 QDataStream &operator<<(QDataStream &ds, const User &model)
 {
