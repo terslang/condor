@@ -8,13 +8,14 @@ run sql/condordb.sql and create a sqlite3 db in db/condordb
 sqlite3 db/condordb < sql/condordb.sql
 ```
 
-add some users to the database like:
+add users:
+In the following example, a user with the email "admin@example.org" and password "password123" is added:
 ```bash
 sqlite3 db/condordb
-> INSERT INTO user(email, password) VALUES ('admin@example.org', '2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824');
+> INSERT INTO user(email, password) VALUES ('admin@example.org', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f');
 ```
 
-`password` is a simple sha256 hashed password. It can be generated using the following command (Here "password123" is used as an example):
+`password` is a simple sha256 hashed password. It can be generated using the following command:
 
 ```bash
 echo -n "password123" | sha256sum
