@@ -41,7 +41,7 @@ User User::authenticate(const QString &email, const QString &password)
         return User();
 
     QString hashedPassword = QString(
-        QCryptographicHash::hash(password.toUtf8(), QCryptographicHash::Md5)
+        QCryptographicHash::hash(password.toUtf8(), QCryptographicHash::Sha256)
             .toHex());
     qDebug() << "HASHED" << hashedPassword;
 
