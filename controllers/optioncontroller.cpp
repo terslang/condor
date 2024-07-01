@@ -6,101 +6,108 @@
 
 static OptionService service;
 
-bool OptionController::preFilter()
+bool
+OptionController::preFilter()
 {
-    if (!isUserLoggedIn()) {
-        redirect(url("Account", "form"));
-        return false;
-    }
-    return true;
+  if (!isUserLoggedIn()) {
+    redirect(url("Account", "form"));
+    return false;
+  }
+  return true;
 }
 
-void OptionController::index()
+void
+OptionController::index()
 {
-    service.index();
-    render();
+  service.index();
+  render();
 }
 
-void OptionController::show(const QString &id)
+void
+OptionController::show(const QString& id)
 {
-    service.show(id);
-    render();
+  service.show(id);
+  render();
 }
 
-void OptionController::create(const QString &electionId)
+void
+OptionController::create(const QString& electionId)
 {
-    switch (request().method()) {
+  switch (request().method()) {
     case Tf::Get:
-        texport(electionId);
-        render();
-        break;
+      texport(electionId);
+      render();
+      break;
     default:
-        renderErrorResponse(Tf::NotFound);
-        break;
-    }
+      renderErrorResponse(Tf::NotFound);
+      break;
+  }
 }
 
-void OptionController::create()
+void
+OptionController::create()
 {
-    QString id;
+  QString id;
 
-    switch (request().method()) {
+  switch (request().method()) {
     case Tf::Get:
-        render();
-        break;
+      render();
+      break;
     case Tf::Post:
-        id = service.create(request());
-        if (!id.isEmpty()) {
-            redirect(urla("show", id));
-        } else {
-            render();
-        }
-        break;
+      id = service.create(request());
+      if (!id.isEmpty()) {
+        redirect(urla("show", id));
+      } else {
+        render();
+      }
+      break;
     default:
-        renderErrorResponse(Tf::NotFound);
-        break;
-    }
+      renderErrorResponse(Tf::NotFound);
+      break;
+  }
 }
 
-void OptionController::save(const QString &id)
+void
+OptionController::save(const QString& id)
 {
-    int res;
+  int res;
 
-    switch (request().method()) {
+  switch (request().method()) {
     case Tf::Get:
-        service.edit(session(), id);
-        render();
-        break;
+      service.edit(session(), id);
+      render();
+      break;
     case Tf::Post:
-        res = service.save(request(), session(), id);
-        if (res > 0) {
-            // Save completed
-            redirect(urla("show", id));
-        } else if (res < 0) {
-            // Failed
-            render();
-        } else {
-            // Retry
-            redirect(urla("save", id));
-        }
-        break;
+      res = service.save(request(), session(), id);
+      if (res > 0) {
+        // Save completed
+        redirect(urla("show", id));
+      } else if (res < 0) {
+        // Failed
+        render();
+      } else {
+        // Retry
+        redirect(urla("save", id));
+      }
+      break;
     default:
-        renderErrorResponse(Tf::NotFound);
-        break;
-    }
+      renderErrorResponse(Tf::NotFound);
+      break;
+  }
 }
 
-void OptionController::remove(const QString &id)
+void
+OptionController::remove(const QString& id)
 {
-    switch (request().method()) {
+  switch (request().method()) {
     case Tf::Post:
-        service.remove(id);
-        redirect(urla("index"));
-        break;
+      service.remove(id);
+      redirect(urla("index"));
+      break;
     default:
-        renderErrorResponse(Tf::NotFound);
-        break;
-    }
+      renderErrorResponse(Tf::NotFound);
+      break;
+  }
 }
 
 // Don't remove below this line

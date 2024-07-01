@@ -2,15 +2,16 @@
 
 #include "applicationcontroller.h"
 
-
 class T_CONTROLLER_EXPORT HomeController : public ApplicationController
 {
-    Q_OBJECT
+  Q_OBJECT
 public:
-    HomeController() : ApplicationController() { }
+  HomeController()
+    : ApplicationController()
+  {
+  }
 
 public slots:
-    void index();
-    bool preFilter() override;
+  void index();
+  bool preFilter() override;
 };
-

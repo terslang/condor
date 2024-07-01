@@ -2,16 +2,17 @@
 
 #include "applicationcontroller.h"
 
-
 class T_CONTROLLER_EXPORT ResultController : public ApplicationController
 {
-    Q_OBJECT
+  Q_OBJECT
 public:
-    ResultController() : ApplicationController() { }
+  ResultController()
+    : ApplicationController()
+  {
+  }
 
 public slots:
-    void show(const QString &electionId);
-    void create(const QString &electionId);
-    bool preFilter() override;
+  void show(const QString& electionId);
+  void create(const QString& electionId);
+  bool preFilter() override;
 };
-

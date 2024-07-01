@@ -4,14 +4,13 @@
 class THttpRequest;
 class TSession;
 
-
-class T_MODEL_EXPORT OptionService {
+class T_MODEL_EXPORT OptionService
+{
 public:
-    void index();
-    void show(const QString &id);
-    QString create(THttpRequest &request);
-    void edit(TSession &session, const QString &id);
-    int save(THttpRequest &request, TSession &session, const QString &id);
-    bool remove(const QString &id);
+  void index();
+  void show(const QString& id);
+  QString create(THttpRequest& request);
+  void edit(TSession& session, const QString& id);
+  int save(THttpRequest& request, TSession& session, const QString& id);
+  bool remove(const QString& id);
 };
-

@@ -36,7 +36,7 @@
          <% if(i.winnerOptionId().isEmpty()) { %>
             TBD
          <% } else { %>
-            linkTo("Show", url("Result", "show", i.id()))
+            <%== linkTo("Show", url("Result", "show", i.id())) %>
          <% } %>
        </td>
        <td>

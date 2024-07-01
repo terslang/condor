@@ -1,20 +1,18 @@
 #pragma once
-#include <TActionController>
 #include "applicationhelper.h"
-
+#include <TActionController>
 
 class T_CONTROLLER_EXPORT ApplicationController : public TActionController
 {
-    Q_OBJECT
+  Q_OBJECT
 public:
-    ApplicationController();
-    virtual ~ApplicationController();
+  ApplicationController();
+  virtual ~ApplicationController();
 
 public slots:
-    void staticInitialize();
-    void staticRelease();
+  void staticInitialize();
+  void staticRelease();
 
 protected:
-    virtual bool preFilter();
+  virtual bool preFilter();
 };
-
